@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>BudFin · IIT Roorkee</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{box-sizing:border-box;color-scheme:light;padding-top:env(safe-area-inset-top,0px);--bg:#cfeeff;--card:rgba(255,255,255,.9);--row:#fff6d6;--tx:#2b2a33;--mu:#6b6a78;--ac:#d9480f;--bd:#f3dd9a;--sh:0 4px 14px rgba(214,150,20,.22);--ok:#2f9e44;--bad:#e03131;--in:#fffdf2}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:linear-gradient(180deg,#7ccfff 0%,#c9ecff 38%,#fff0b8 80%,#ffe08a 100%) fixed;color:var(--tx);font:15px/1.4 system-ui,sans-serif;min-height:100vh;padding:14px 12px calc(14px + env(safe-area-inset-bottom,0px));position:relative;overflow-x:hidden}
+.bl{position:fixed;z-index:0;border-radius:50%;filter:blur(2px)}
+.b1{width:300px;height:300px;right:-70px;top:-70px;background:radial-gradient(circle at 40% 40%,#fffbd0,#ffd43b 55%,#ffb703);box-shadow:0 0 90px 45px rgba(255,214,60,.6)}
+.b2{width:460px;height:150px;left:-140px;bottom:50px;background:#fff;opacity:.85;filter:blur(16px)}
+.phone{position:relative;z-index:1;max-width:430px;margin:auto;background:var(--card);border-radius:30px;padding:20px 18px 26px;min-height:calc(100vh - 28px);backdrop-filter:blur(6px);box-shadow:0 18px 50px rgba(255,170,0,.28)}
+h1{font-size:30px;margin:18px 0 14px;font-weight:600}h2{font-size:14px;margin:22px 0 10px;font-weight:500;color:var(--mu)}
+.search{position:relative}.search input{padding:11px 38px 11px 14px;border-radius:12px;border:0;background:var(--in);box-shadow:var(--sh);font-size:13px}
+.search svg{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--mu)}
+input,select,textarea{width:100%;padding:11px 13px;border-radius:12px;border:1px solid var(--bd);background:var(--in);color:var(--tx);font:inherit;margin:5px 0}
+.free{display:flex;align-items:center;justify-content:space-between;background:var(--in);border-radius:16px;padding:12px 14px;margin-bottom:16px}
+.sw{width:46px;height:26px;border-radius:99px;background:var(--bd);position:relative;border:0;cursor:pointer;flex:none}
+.sw:after{content:"";position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:.2s}.sw.on{background:var(--ok)}.sw.on:after{left:23px}
+.q{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;text-align:center;font-size:11px;color:var(--mu)}
+.q button{border:0;background:none;color:inherit;font:inherit;cursor:pointer;padding:0}
+.q i{display:grid;place-items:center;width:100%;aspect-ratio:1;border-radius:18px;color:#fff;margin-bottom:7px;box-shadow:var(--sh)}
+.fav{display:flex;gap:14px;overflow-x:auto;padding-bottom:4px}.fav button{border:0;background:none;color:var(--mu);font-size:10px;text-align:center;cursor:pointer;min-width:58px}
+.av{width:50px;height:50px;border-radius:50%;background:var(--in);display:grid;place-items:center;font-size:25px;position:relative;margin:0 auto 4px;border:2px solid var(--bd)}
+.av u{position:absolute;right:-1px;bottom:-1px;width:14px;height:14px;border-radius:50%;border:2px solid var(--card);background:var(--mu)}.av u.g{background:var(--ok)}
+.grp{display:flex;gap:10px;align-items:flex-start;margin-bottom:12px}.grp>b{width:16px;color:var(--ac);font-size:18px;padding-top:12px}
+.rows{flex:1}.rw{display:flex;gap:10px;align-items:center;background:var(--row);border-radius:14px;padding:9px 12px;box-shadow:var(--sh);margin-bottom:10px;cursor:pointer}
+.rw .av{margin:0;width:38px;height:38px;font-size:19px}.rw small{display:block;color:var(--mu);font-size:11px}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--mu);flex:none}.dot.g{background:var(--ok)}
+.fab{position:fixed;right:max(16px,calc(50% - 205px));bottom:90px;width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#ffb703,#ff7a00);color:#fff;display:grid;place-items:center;font-size:18px;z-index:3;box-shadow:var(--sh)}
+.bk{border:0;background:none;color:var(--tx);font:inherit;font-size:22px;font-weight:600;cursor:pointer;padding:0;margin:14px 0}
+.card{background:var(--row);border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:var(--sh)}.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.mu{color:var(--mu);font-size:13px}
+.chip{border:1px solid var(--bd);background:none;color:var(--tx);border-radius:99px;padding:5px 12px;font-size:13px;cursor:pointer}.chip.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.tag{background:var(--in);color:var(--ac);border-radius:99px;padding:2px 9px;font-size:11px;font-weight:600}
+button.p,button.s{border-radius:99px;padding:8px 15px;font:inherit;font-size:13px;font-weight:600;cursor:pointer;border:1px solid var(--ac)}
+button.p{background:var(--ac);color:#fff}button.s{background:none;color:var(--ac)}button.d{border-color:var(--bad);color:var(--bad)}
+.msg{padding:8px 12px;border-radius:14px;margin:5px 0;max-width:85%}.me{background:var(--ac);color:#fff;margin-left:auto}.bt{background:var(--in)}
+.ov{position:fixed;inset:0;background:#0006;z-index:6;display:flex;align-items:flex-end;justify-content:center}
+.sheet{background:var(--card);width:100%;max-width:430px;border-radius:26px 26px 0 0;padding:20px 18px calc(20px + env(safe-area-inset-bottom,0px))}
+.chat{position:fixed;inset:0;background:var(--card);z-index:5;max-width:430px;margin:auto;display:flex;flex-direction:column;padding:16px;padding-top:calc(16px + env(safe-area-inset-top,0px))}
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:var(--tx);color:var(--card);padding:10px 16px;border-radius:99px;font-size:14px;z-index:9}
+.rep{margin:8px 0 0 12px;border-left:3px solid var(--bd);padding:2px 10px}.mt{background:#e6f7ea;border-radius:12px;padding:8px 10px;margin-top:8px;font-size:13px}.cd{display:inline-block;width:11px;height:11px;border-radius:50%;border:1px solid #0003;vertical-align:-1px}.msg small{font-size:10px}.tag.lv{color:var(--ok)}.rw small{margin-top:1px}</style></head><body>
+<div class="bl b1"></div><div class="bl b2"></div>
+<div class="phone" id="app"></div>
+<script>
+const PURP=['Chill','Study','Gym','Build','Music','Food'];
+const IC={search:'<circle cx="11" cy="11" r="6.5"/><path d="M16 16l5 5"/>',
+heart:'<path d="M12 20s-8-4.7-8-10.5A4.5 4.5 0 0 1 12 7a4.5 4.5 0 0 1 8 2.5C20 15.3 12 20 12 20z"/>',
+bulb:'<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/>',
+mega:'<path d="M4 10v4h3l7 4V6L7 10H4zM17 9a4 4 0 0 1 0 6"/>',
+gear:'<circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/>',
+chat:'<path d="M20 12a8 8 0 0 1-11.6 7.1L4 20l1-4A8 8 0 1 1 20 12z"/>'};
+const ic=(n,s=26)=>`<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${IC[n]}</svg>`;
+const QA=[['match','heart','Matches','linear-gradient(135deg,#ffb703,#fb8500)'],['ideas','bulb','Ideas','linear-gradient(135deg,#4dabf7,#1c7ed6)'],['lf','mega','Lost &amp; Found','linear-gradient(135deg,#51cf66,#2f9e44)'],['buddy','chat','AI buddy','linear-gradient(135deg,#ff8fab,#f06595)']];
+const NEAR=500,H=36e5;
+const CATS=['Bottle','ID card','Phone','Bag','Keys','Earphones','Wallet','Laptop/Charger','Clothing','Other'],COLS=['Black','White','Blue','Red','Green','Yellow','Grey','Brown','Pink','Orange','Purple'],SZ=['Small','Medium','Large'],LOCS=['Cautley Library','Main Building','Canteen / Chai point','Sports ground','Ganga Canal bank','Hostel area','Lecture halls','Other'];
+const COLH={Black:'#222',White:'#fff',Blue:'#2f7de1',Red:'#e03131',Green:'#2f9e44',Yellow:'#fcc419',Grey:'#868e96',Brown:'#8d5524',Pink:'#f783ac',Orange:'#fd7e14',Purple:'#7950f2'};
+const $=s=>document.querySelector(s);
+const toast=t=>{const e=document.createElement('div');e.className='toast';e.textContent=t;document.body.append(e);setTimeout(()=>e.remove(),2400)};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const wd=s=>new Set((s||'').toLowerCase().split(/[^a-z0-9]+/).filter(w=>w.length>2&&!STOP.includes(w)));
+const STOP='the a an and with near has have for from was were this that it its in on at of to is'.split(' ');
+function lfScore(a,b){if(a.k==b.k||a.cat!=b.cat)return 0;let s=10;if(a.col==b.col)s+=25;if(a.sz==b.sz)s+=10;const x=a.br.toLowerCase().trim(),y=b.br.toLowerCase().trim();if(x&&y&&(x.includes(y)||y.includes(x)))s+=15;if(a.loc==b.loc)s+=15;const h=Math.abs(a.ts-b.ts)/H;s+=h<=24?10:h<=72?5:0;const p=wd(a.d),q=wd(b.d),n=[...p].filter(w=>q.has(w)).length,u=new Set([...p,...q]).size;if(u)s+=Math.round(15*n/u);return s}
+function ago(t){const m=Math.max(0,Math.round((Date.now()-t)/6e4));return m<1?'just now':m<60?m+'m ago':m<1440?Math.round(m/60)+'h ago':Math.round(m/1440)+'d ago'}
+function modal(h){cl();const o=document.createElement('div');o.id='md';o.className='ov';o.innerHTML=`<div class="sheet">${h}</div>`;o.onclick=e=>{if(e.target==o)cl()};document.body.append(o)}
+function cl(){const o=$('#md');if(o)o.remove()}
+let DB,UID,EMAIL='',ADMIN=false,SM=null,READY=0,MADE=0,cu=null,lfInit=0,dirty=0;
+const D={g:[],m:[],p:{},i:[],ii:[],r:[],lf:[],mt:[],rp:[],cfg:{},cm:[]};
+const S={tab:'home',q:'',pf:'',io:null,purp:'Chill',mi:['chai','anime'],notif:1,hid:[],blk:[],loc:null,lm:'',bot:[{t:'Hey! Tell me your mood or what you want to do.'}]};
+try{Object.assign(S,JSON.parse(localStorage.getItem('bf5')||'{}'))}catch(e){}
+const sv=()=>{try{localStorage.setItem('bf5',JSON.stringify({mi:S.mi,purp:S.purp,hid:S.hid,blk:S.blk,notif:S.notif}))}catch(e){}};
+const me=()=>D.p[UID]||{al:'…',em:'🙂'},al=u=>u=='seed'?'BudFin Team':(D.p[u]||{}).al||'Someone',emo=u=>(D.p[u]||{}).em||'🙂';
+const VER=()=>/@([a-z0-9-]+\.)*iitr\.ac\.in$/i.test(EMAIL);
+const mem=g=>D.m.filter(x=>x.g==g),joined=g=>D.m.some(x=>x.g==g&&x.u==UID);
+const setP=o=>DB.doc('profiles/'+UID).update(o).catch(()=>toast('Could not save'));
+const km=(a,b,c,d)=>{const r=Math.PI/180,h=Math.sin((c-a)*r/2)**2+Math.cos(a*r)*Math.cos(c*r)*Math.sin((d-b)*r/2)**2;return 12742*Math.asin(Math.sqrt(h))};
+const TT={match:'Matches',ideas:'Ideas',lf:'Lost &amp; Found',buddy:'AI buddy',me:'Profile',settings:'Settings'};
+const R=()=>render(1),go=t=>{S.tab=t;R();window.scrollTo(0,0)};
+function render(f){const a=document.activeElement;if(!f&&a&&/INPUT|TEXTAREA|SELECT/.test(a.tagName)&&$('#app').contains(a)){dirty=1;return}dirty=0;
+ $('#app').innerHTML=READY?(S.tab=='home'?'':`<button class="bk" onclick="go('home')">‹ ${TT[S.tab]}</button>`)+V[S.tab]():'<p class="mu" style="margin-top:40vh;text-align:center">Connecting to BudFin…</p>'}
+document.addEventListener('focusout',()=>setTimeout(()=>{if(dirty)render()},60));
+const rows=s=>s.docs.map(d=>({id:d.id,...d.data()}));
+function sub(c,fn){DB.collection(c).onSnapshot(s=>{fn(s);render()},e=>toast('Sync issue: '+e.message))}
+async function init(){let m0;try{m0=await API('me')}catch(e){return loginUI()}
+DB=mkDB();UID=m0.id;EMAIL=m0.email;ADMIN=!!m0.admin;SM=p=>API('ai',{prompt:p});
+ sub('profiles',s=>{D.p={};rows(s).forEach(x=>D.p[x.id]=x);if(!D.p[UID]&&!MADE){MADE=1;DB.doc('profiles/'+UID).set({al:'Newbie_'+(100+Math.floor(Math.random()*900)),em:'🙂',ready:0,int:S.mi,p:S.purp})}});
+ sub('groups',s=>D.g=rows(s));sub('members',s=>D.m=rows(s));sub('ideas',s=>D.i=rows(s));sub('ideaIn',s=>D.ii=rows(s));sub('replies',s=>D.r=rows(s));
+ sub('meetups',s=>D.mt=rows(s));sub('reports',s=>D.rp=rows(s));sub('config',s=>D.cfg=rows(s).find(x=>x.id=='main')||{});
+ sub('lf',s=>{const nw=lfInit?s.docChanges().filter(c=>c.type=='added').map(c=>({id:c.doc.id,...c.doc.data()})):[];D.lf=rows(s);lfInit=1;
+  if(S.notif)nw.forEach(n=>{if(n.by!=UID&&D.lf.some(x=>x.by==UID&&!x.done&&lfScore(x,n)>=45))toast('New possible match for your '+(n.k=='found'?'lost':'found')+' item!')})});
+ READY=1;R()}
+function gate(m){if(D.cfg.requireIITR&&EMAIL&&!VER()){go('me');toast('Verify with an @iitr.ac.in account to '+m);return 0}return 1}
+const V={
+home(){const mine=D.g.filter(g=>joined(g.id));return `<div class="search"><input placeholder="Search groups, activities, interests" value="${esc(S.q)}" oninput="filt(this.value)">${ic('search',17)}</div>
+ <div class="row" style="justify-content:space-between"><h1>Groups</h1><button class="s" aria-label="Settings" onclick="go('settings')" style="padding:8px 10px;display:grid">${ic('gear',20)}</button></div>
+ <div class="free"><div><b>Free to chill?</b><div class="mu">${me().ready?'Visible within 500 m (alias only)':'Tap to show you’re ready to meet'}</div></div><button class="sw ${me().ready?'on':''}" aria-label="Ready to meet" onclick="toggleReady()"></button></div>
+ <div class="q">${QA.map(a=>`<button onclick="go('${a[0]}')"><i style="background:${a[3]}">${ic(a[1],28)}</i>${a[2]}</button>`).join('')}</div>
+ <h2>My groups</h2><div class="fav">${mine.map(g=>`<button onclick="gprof('${g.id}')"><div class="av">${g.em}<u class="${g.live?'g':''}"></u></div>${esc(g.n.split(' ')[0])}</button>`).join('')||'<span class="mu" style="align-self:center">Join a group below.</span>'}
+ <button onclick="go('me')"><div class="av" style="font-size:18px">${me().em}<u class="${VER()?'g':''}"></u></div>${VER()?'Verified':'Profile'}</button></div>
+ <h2 class="row" style="justify-content:space-between">Groups with activity <button class="p" onclick="cg()">+ Create</button></h2><div class="row" style="margin-bottom:12px">${PURP.map(p=>`<span class="chip ${S.pf==p?'on':''}" onclick="S.pf=S.pf=='${p}'?'':'${p}';R()">${p}</span>`).join('')}</div><div id="lst">${listHtml()}</div>`},
+match(){const near=Object.entries(D.p).filter(([u,p])=>u!=UID&&!S.blk.includes(u)&&p.ready&&p.lat!=null&&S.loc&&Date.now()-(p.seen||0)<108e5).map(([u,p])=>({u,p,d:km(S.loc.lat,S.loc.lng,p.lat,p.lng)*1000})).filter(x=>x.d<=NEAR).map(x=>({...x,sh:(x.p.int||[]).filter(i=>S.mi.includes(i))})).sort((a,b)=>(b.sh.length*2+(b.p.p==S.purp?3:0))-(a.sh.length*2+(a.p.p==S.purp?3:0)));
+ return `<div class="card"><b>Your purpose</b><div class="row" style="margin:10px 0">${PURP.map(p=>`<span class="chip ${S.purp==p?'on':''}" onclick="S.purp='${p}';sv();setP({p:'${p}'});R()">${p}</span>`).join('')}</div>
+ <b>Your interests</b><input placeholder="Add an interest, press Enter" onkeydown="if(event.key=='Enter'&&this.value.trim()){S.mi.push(this.value.trim().toLowerCase());sv();setP({int:S.mi});R()}">
+ <div class="row">${S.mi.map((i,x)=>`<span class="chip on" onclick="S.mi.splice(${x},1);sv();setP({int:S.mi});R()">${esc(i)} ✕</span>`).join('')}</div></div>
+ <div class="mu" style="margin-bottom:8px">📍 People who are free within 500 m of you</div>${S.loc?'':'<button class="p" onclick="getLoc(()=>{R()})">Use my location</button>'}
+ ${near.map(x=>`<div class="card row" style="justify-content:space-between"><div class="row"><div class="av" style="margin:0">${x.p.em||'🙂'}</div><div><b>${esc(x.p.al)}</b><div class="mu">${x.p.p==S.purp?'Same purpose · ':''}${x.sh.length} shared · ~${Math.max(50,Math.round(x.d/50)*50)} m away</div></div></div><div class="row"><button class="p" onclick="dm('${x.u}')">Chat</button><button class="s d" onclick="rep('user','${x.u}')">Report</button></div></div>`).join('')||(S.loc?'<p class="mu">Nobody free within 500 m right now. Turn on “Free to chill?” so others can find you too.</p>':'')}`},
+ideas(){return `<div class="card"><input id="it" placeholder="Idea title"><textarea id="ib" rows="2" placeholder="Describe it so others can jump in…"></textarea><button class="p" onclick="addIdea()">Start discussion</button></div>
+ ${[...D.i].sort((a,b)=>b.ts-a.ts).map(x=>{const o=S.io==x.id,jn=D.ii.some(y=>y.i==x.id&&y.u==UID),rs=D.r.filter(r=>r.i==x.id).sort((a,b)=>a.ts-b.ts);return `<div class="card"><b>${esc(x.t)}</b><div class="mu">by ${esc(al(x.by))} · ${ago(x.ts)} · ${D.ii.filter(y=>y.i==x.id).length} in</div>${x.b?`<p style="margin:8px 0">${esc(x.b)}</p>`:''}
+ <div class="row"><button class="s" onclick="S.io=${o?'null':`'${x.id}'`};R()">💬 ${rs.length} ${rs.length==1?'reply':'replies'}</button><button class="${jn?'s':'p'}" onclick="joinI('${x.id}')">${jn?'Leave':'I’m in'}</button>${x.by==UID||ADMIN?`<button class="s d" onclick="DB.doc('ideas/${x.id}').delete()">Delete</button>`:''}</div>
+ ${o?`${rs.map(r=>`<div class="rep"><b>${esc(al(r.by))}</b> <span class="mu">${ago(r.ts)}</span><div>${r.to?`<span class="mu">↩ @${esc(al(r.to))}</span> `:''}${esc(r.t)}</div><button class="s" style="padding:2px 10px;font-size:11px;margin-top:4px" onclick="rto('${r.by}')">Reply</button></div>`).join('')||'<p class="mu">No replies yet. Start the conversation.</p>'}
+ <div class="row" style="flex-wrap:nowrap;margin-top:8px"><input id="ri" placeholder="Write a reply…" onkeydown="if(event.key=='Enter')addRep('${x.id}')"><button class="p" onclick="addRep('${x.id}')">Send</button></div>`:''}</div>`}).join('')||'<p class="mu">No ideas yet. Post the first one.</p>'}`},
+lf(){const op=(a,v)=>a.map(x=>`<option ${x==v?'selected':''}>${x}</option>`).join(''),L=D.lf.filter(x=>!x.done).sort((a,b)=>((b.by==UID)-(a.by==UID))||b.ts-a.ts);return `<div class="card"><b>Report an item</b>
+ <select id="lk"><option value="lost">I lost something</option><option value="found">I found something</option></select>
+ <div class="row" style="flex-wrap:nowrap"><select id="lc">${op(CATS)}</select><select id="lo">${op(COLS)}</select></div>
+ <div class="row" style="flex-wrap:nowrap"><select id="lz">${op(SZ,'Medium')}</select><input id="lb" placeholder="Brand (optional)"></div>
+ <select id="ll">${op(LOCS)}</select><input id="ld" type="datetime-local"><textarea id="lt" rows="2" placeholder="Marks, stickers, dents, contents…"></textarea>
+ <button class="p" onclick="addLf()">Post &amp; find matches</button></div>
+ ${L.map(x=>{const mine=x.by==UID,m=mine?lfMatch(x):[];return `<div class="card"><div class="row"><span class="tag">${x.k}</span><b>${x.cat}</b><span class="mu"><i class="cd" style="background:${COLH[x.col]}"></i> ${x.col} · ${x.sz}${x.br?' · '+esc(x.br):''}</span></div><div class="mu" style="margin-top:4px">📍 ${x.loc} · ${ago(x.ts)} · ${esc(al(x.by))}</div>${x.d?`<div style="margin-top:4px">${esc(x.d)}</div>`:''}
+ ${mine?(m.length?m.map(y=>`<div class="mt"><b>${y.s}% match</b> · ${y.o.k} ${y.o.cat}, ${y.o.col}, ${y.o.loc}<br><button class="p" style="margin-top:6px;padding:4px 12px" onclick="${y.o.by=='seed'?"toast('Demo item')":`dm('${y.o.by}')`}">Contact ${esc(al(y.o.by))}</button></div>`).join(''):'<div class="mu" style="margin-top:6px">No matches yet. You’ll be notified when one is posted.</div>')+`<button class="s" style="margin:8px 6px 0 0;padding:4px 12px" onclick="DB.doc('lf/${x.id}').update({done:1})">Mark resolved</button><button class="s d" style="margin-top:8px;padding:4px 12px" onclick="DB.doc('lf/${x.id}').delete()">Remove</button>`:(ADMIN?`<button class="s d" style="margin-top:8px;padding:4px 12px" onclick="DB.doc('lf/${x.id}').delete()">Remove</button>`:'')}</div>`}).join('')}`},
+buddy(){return `<div class="row" style="margin-bottom:10px">${['bored','hungry','study','idea'].map(w=>`<span class="chip" onclick="$('#bi').value='I feel ${w}';bot()">${w}</span>`).join('')}</div><div class="card" id="bl">${botHtml()}</div><input id="bi" placeholder="Tell me how you feel…" onkeydown="if(event.key=='Enter')bot()">`},
+settings(){const t=(on,f)=>`<button class="sw ${on?'on':''}" onclick="${f}"></button>`;return `<div class="card"><b>Nearby radius</b><div class="mu" style="margin-top:6px">People within <b>500 m</b> count as nearby. Fixed to keep meetups local.</div></div>
+ <div class="card row" style="justify-content:space-between"><div><b>Visible to people nearby</b><div class="mu">Alias and ~100 m-rounded location, 3 h max</div></div>${t(me().ready,'toggleReady()')}</div>
+ <div class="card row" style="justify-content:space-between"><div><b>Notifications</b><div class="mu">Lost &amp; found matches</div></div>${t(S.notif,'S.notif^=1;sv();R()')}</div>
+ <div class="card"><b>Account</b><div class="row" style="margin-top:8px"><button class="s" onclick="go('me')">Profile &amp; verification</button></div></div>
+ ${ADMIN?`<div class="card"><b>Admin</b><div class="row" style="justify-content:space-between;margin:8px 0"><span class="mu">Require @iitr.ac.in account to join or create</span>${t(D.cfg.requireIITR,"DB.doc('config/main').set({requireIITR:"+(D.cfg.requireIITR?0:1)+"})")}</div>
+ <b class="mu">Reports (${D.rp.length})</b>${D.rp.slice(-8).map(r=>`<div class="mt">${r.k}: ${esc(r.why)}<br>${r.k=='group'?`<button class="s d" style="padding:3px 10px" onclick="DB.doc('groups/${r.target}').delete();DB.doc('reports/${r.id}').delete()">Remove group</button> `:''}<button class="s" style="padding:3px 10px" onclick="DB.doc('reports/${r.id}').delete()">Dismiss</button></div>`).join('')}</div>`:''}`},
+me(){return `<div class="card"><div class="mu">Anonymous alias</div><input value="${esc(me().al)}" maxlength="24" onchange="setP({al:this.value.trim()||'Newbie'})"><div class="row" style="margin-top:6px">${['🙂','😎','🦄','🐯','🎧','🚀'].map(e=>`<span class="chip ${me().em==e?'on':''}" onclick="setP({em:'${e}'})">${e}</span>`).join('')}</div></div>
+ <div class="card"><b>IITR verification</b><p class="mu">${VER()?'✔ Verified: your Claude account uses an @iitr.ac.in email.':(EMAIL?'Not verified. Sign in to Claude with your @iitr.ac.in email to get the badge.':'Email isn’t shared with this page, so the badge can’t be checked yet.')}</p></div>
+ <div class="card"><b>Location check</b><p class="mu">Compares your GPS with the IITR campus.</p><button class="s" onclick="locChk()">Verify my location</button><p class="mu">${S.lm}</p></div>`}};
+function botHtml(){return S.bot.map(m=>`<div class="msg ${m.me?'me':'bt'}">${esc(m.t)}</div>`).join('')}
+async function bot(){const i=$('#bi'),v=i.value.trim();if(!v)return;S.bot.push({me:1,t:v});i.value='';$('#bl').innerHTML=botHtml();let r='';
+ try{if(SM)r=(await SM(`You are BudFin Buddy for IIT Roorkee students. Reply in under 60 words, suggest relevant groups or ideas, and keep meetups in public places. Groups: ${D.g.slice(0,12).map(g=>g.n+' ('+g.p+', '+g.when+', '+g.pl+')').join('; ')}. Student says: ${v}`,{modelTier:'quick',cache:false})).text}catch(e){}
+ S.bot.push({t:r||'I can’t reach the AI right now. Try the Groups list or post in Ideas.'});S.bot=S.bot.slice(-30);const b=$('#bl');if(b)b.innerHTML=botHtml()}
+function getLoc(cb){if(!navigator.geolocation)return toast('GPS not available');navigator.geolocation.getCurrentPosition(p=>{S.loc={lat:p.coords.latitude,lng:p.coords.longitude};cb&&cb()},()=>toast('Location permission denied'),{enableHighAccuracy:true,timeout:8000})}
+function toggleReady(){if(me().ready)return setP({ready:0,lat:null,lng:null});getLoc(()=>setP({ready:1,lat:Math.round(S.loc.lat*1e3)/1e3,lng:Math.round(S.loc.lng*1e3)/1e3,seen:Date.now()}))}
+function locChk(){getLoc(()=>{const k=km(29.8649,77.8966,S.loc.lat,S.loc.lng);S.lm=k<2?'✔ On campus. Location looks genuine.':`⚠ ${k.toFixed(1)} km from campus.`;R()})}
+function listHtml(){const q=S.q.toLowerCase();return D.g.filter(g=>!S.hid.includes(g.id)&&(!S.pf||g.p==S.pf)&&(!q||(g.n+g.act+g.p+(g.int||[]).join(' ')).toLowerCase().includes(q))).sort((a,b)=>(b.live-a.live)||b.ts-a.ts).map(g=>`<div class="rw" onclick="gprof('${g.id}')"><div class="av">${g.em}</div><div style="flex:1;min-width:0"><b>${esc(g.n)}</b>${g.live?' <span class="tag lv">● live</span>':''}<small>${esc(g.act)}</small><small>${esc(g.when)} · ${esc(g.pl)}</small></div><div style="text-align:right"><span class="tag">${g.p}</span><small>${mem(g.id).length}/${g.cap} joined</small></div></div>`).join('')||'<p class="mu">No groups match. Create your own with + Create.</p>'}
+function filt(v){S.q=v;$('#lst').innerHTML=listHtml()}
+let ge='🎯';function pickE(e){ge=e;document.querySelectorAll('.eg').forEach(x=>x.classList.toggle('on',x.textContent==e))}
+function cg(){if(!gate('create groups'))return;ge='🎯';modal(`<b style="font-size:19px">Create a group</b><input id="gn" maxlength="30" placeholder="Group name (e.g. Sunday Badminton)">
+ <div class="row" style="margin:6px 0">${['🎯','⚽','🏸','☕','📚','🎸','🍜','🛠️','🎮','🌿'].map(e=>`<span class="chip eg ${e==ge?'on':''}" onclick="pickE('${e}')">${e}</span>`).join('')}</div>
+ <select id="gp">${PURP.map(p=>`<option>${p}</option>`).join('')}</select><input id="ga" maxlength="60" placeholder="Activity (e.g. Casual doubles match)">
+ <label class="mu"><input id="gl" type="checkbox" style="width:auto;margin:0 6px 0 0">Happening now</label><input id="gd" type="datetime-local">
+ <select id="gpl">${LOCS.map(p=>`<option>${p}</option>`).join('')}</select>
+ <select id="gc">${[4,6,8,10,15].map(n=>`<option value="${n}" ${n==8?'selected':''}>Up to ${n} people</option>`).join('')}</select><input id="gi" placeholder="Interests, comma separated (optional)">
+ <p class="mu">You’ll be the first member. Only aliases are shown. Meet in public places.</p><div class="row"><button class="p" onclick="saveG()">Create group</button><button class="s" onclick="cl()">Cancel</button></div>`)}
+async function saveG(){const n=$('#gn').value.trim();if(!n)return toast('Give your group a name');const live=$('#gl').checked,d=$('#gd').value;if(!live&&!d)return toast('Pick a time or tick Happening now');
+ const g={n,em:ge,p:$('#gp').value,act:$('#ga').value.trim()||'Hang out together',when:live?'Now':new Date(d).toLocaleString([],{weekday:'short',hour:'numeric',minute:'2-digit'}),pl:$('#gpl').value,cap:+$('#gc').value,live:live?1:0,int:$('#gi').value.split(',').map(x=>x.trim().toLowerCase()).filter(Boolean),by:UID,ts:Date.now()};
+ try{const r=await DB.collection('groups').add(g);await DB.doc('members/'+r.id+'_'+UID).set({g:r.id,u:UID});cl();toast('Group created. You’re the first member!')}catch(e){toast('Could not create group')}}
+function gprof(id){const g=D.g.find(x=>x.id==id);if(!g)return;const j=joined(id),ms=mem(id),sh=(g.int||[]).filter(i=>S.mi.includes(i)),mt=D.mt.filter(x=>x.g==id).sort((a,b)=>a.ts-b.ts).slice(-3);
+ modal(`<div class="row" style="flex-wrap:nowrap"><div class="av" style="margin:0">${g.em}</div><div><b style="font-size:18px">${esc(g.n)}</b><div class="mu">${g.p} · ${ms.length}/${g.cap} joined${g.live?' · happening now':''}</div></div></div>
+ <div class="card" style="margin:12px 0"><b>${esc(g.act)}</b><div class="mu" style="margin-top:6px">🕒 ${esc(g.when)}<br>📍 ${esc(g.pl)}</div></div>
+ <div class="mu">Members (aliases only)</div><div class="fav" style="margin:8px 0">${ms.map(x=>`<button onclick="${x.u==UID?'':`cl();dm('${x.u}')`}"><div class="av">${emo(x.u)}</div>${esc(al(x.u).split('_')[0])}</button>`).join('')||'<span class="mu">No members yet.</span>'}</div>
+ ${mt.length?`<div class="mu">Meetup proposals</div>${mt.map(x=>`<div class="mt">📅 ${esc(x.at)} · ${esc(x.pl)} <span class="mu">by ${esc(al(x.by))}</span></div>`).join('')}`:''}
+ <p class="mu">${sh.length?'You both like <b>'+sh.join(', ')+'</b>':'Into '+((g.int||[]).join(', ')||'anything')}</p>
+ <div class="row"><button class="p" onclick="joinG('${id}')">${j?'Leave group':'Join group'}</button>${j?`<button class="s" onclick="cl();chat('g_${id}','${g.em} ${esc(g.n)}')">Group chat</button><button class="s" onclick="gplan('${id}')">Propose meetup</button>`:`<button class="s" disabled style="opacity:.5;cursor:not-allowed">Join to propose meetup</button>`}<button class="s d" onclick="rep('group','${id}')">Report</button>${g.by==UID||ADMIN?`<button class="s d" onclick="DB.doc('groups/${id}').delete();cl()">Delete</button>`:''}</div>`)}
+async function joinG(id){const g=D.g.find(x=>x.id==id),r=DB.doc('members/'+id+'_'+UID);try{if(joined(id)){await r.delete();toast('You left the group')}else{if(!gate('join groups'))return cl();if(mem(id).length>=g.cap)return toast('This group is full');await r.set({g:id,u:UID});toast('You joined the group')}cl()}catch(e){toast('Could not update membership')}}
+function gplan(id){if(!joined(id))return toast('Join the group first to propose a meetup');const g=D.g.find(x=>x.id==id);modal(`<b style="font-size:18px">Propose a meetup · ${esc(g.n)}</b><input id="pd" type="datetime-local"><select id="pl"><option>${esc(g.pl)}</option>${LOCS.filter(l=>l!=g.pl).map(l=>`<option>${l}</option>`).join('')}</select><p class="mu">Tip: meet in a public, busy place.</p><div class="row"><button class="p" onclick="sendPlan('${id}')">Send to group</button><button class="s" onclick="cl()">Cancel</button></div>`)}
+async function sendPlan(id){const d=$('#pd').value;if(!d)return toast('Pick date and time');if(!joined(id))return toast('Join the group first');await DB.collection('meetups').add({g:id,by:UID,pl:$('#pl').value,at:new Date(d).toLocaleString([],{weekday:'short',hour:'numeric',minute:'2-digit'}),ts:Date.now()});await DB.collection('msgs').add({g:'g_'+id,u:UID,t:'📅 Proposed a meetup at '+$('#pl').value+' · '+new Date(d).toLocaleString(),ts:Date.now()});cl();toast('Proposal sent to the group')}
+function rep(k,t){modal(`<b style="font-size:18px">Report ${k}</b><select id="rw"><option>Harassment / creepy behaviour</option><option>Sexual or explicit content</option><option>Child safety concern</option><option>Fake profile / false location</option><option>Spam</option></select><textarea id="rd" placeholder="Details (optional)"></textarea><div class="row"><button class="p" onclick="sendRep('${k}','${t}')">Report &amp; hide</button><button class="s" onclick="cl()">Cancel</button></div>`)}
+function sendRep(k,t){DB.collection('reports').add({k,target:t,why:$('#rw').value+' '+$('#rd').value.trim(),by:UID,ts:Date.now()});(k=='group'?S.hid:S.blk).push(t);sv();cl();R();toast('Reported and hidden. Admins will review.')}
+function dm(u){chat('dm_'+[UID,u].sort().join('_'),emo(u)+' '+al(u))}
+function chat(key,title){closeChat();const o=document.createElement('div');o.id='cv';o.className='chat';o.innerHTML=`<div class="row" style="justify-content:space-between"><b>${esc(title)}</b><button class="s" onclick="closeChat()">Close</button></div><div id="cl" style="flex:1;overflow:auto;padding:8px 0"></div><input id="ci" placeholder="Message…" onkeydown="if(event.key=='Enter')send('${key}')">`;document.body.append(o);D.cm=[];
+ cu=DB.collection('msgs').where('g','==',key).onSnapshot(s=>{D.cm=rows(s).sort((a,b)=>a.ts-b.ts).slice(-100);drawChat()})}
+function closeChat(){if(cu)cu();cu=null;const o=$('#cv');if(o)o.remove()}
+function drawChat(){const c=$('#cl');if(!c)return;c.innerHTML=D.cm.map(m=>`<div class="msg ${m.u==UID?'me':'bt'}">${m.u==UID?'':`<small style="display:block;font-size:10px;opacity:.7">${esc(al(m.u))}</small>`}${esc(m.t)}</div>`).join('')||'<p class="mu">Say hi 👋</p>';c.scrollTop=9e9}
+function send(key){const i=$('#ci'),t=i.value.trim();if(!t)return;i.value='';DB.collection('msgs').add({g:key,u:UID,t:t.slice(0,500),ts:Date.now()}).catch(()=>toast('Could not send'))}
+async function addIdea(){const t=$('#it').value.trim();if(!t)return toast('Add a title');const r=await DB.collection('ideas').add({t,b:$('#ib').value.trim(),by:UID,ts:Date.now()});await DB.doc('ideaIn/'+r.id+'_'+UID).set({i:r.id,u:UID});S.io=r.id;R()}
+function joinI(id){const r=DB.doc('ideaIn/'+id+'_'+UID);D.ii.some(y=>y.i==id&&y.u==UID)?r.delete():(r.set({i:id,u:UID}),toast('You’re in!'))}
+function rto(u){const i=$('#ri');i.value='@'+al(u)+' ';i.dataset.to=u;i.focus()}
+async function addRep(id){const i=$('#ri'),t=i.value.replace(/^@\S+\s+/,'').trim();if(!t)return;const to=/^@/.test(i.value)?i.dataset.to||'':'';i.value='';await DB.collection('replies').add({i:id,by:UID,t:t.slice(0,600),to,ts:Date.now()})}
+async function addLf(){const d=$('#ld').value;await DB.collection('lf').add({k:$('#lk').value,cat:$('#lc').value,col:$('#lo').value,sz:$('#lz').value,br:$('#lb').value.trim(),loc:$('#ll').value,d:$('#lt').value.trim(),ts:d?new Date(d).getTime():Date.now(),by:UID});toast('Posted. You’ll be notified on a match.')}
+function lfMatch(a){return D.lf.filter(o=>o.id!=a.id&&!o.done).map(o=>({o,s:lfScore(a,o)})).filter(r=>r.s>=45).sort((p,q)=>q.s-p.s).slice(0,3)}
+const API=async(p,b)=>{const r=await fetch('/api/'+p,{method:'POST',headers:{'content-type':'application/json'},credentials:'same-origin',body:JSON.stringify(b||{})}),j=await r.json().catch(()=>({}));if(!r.ok)throw Object.assign(new Error(j.error||'Request failed'),{status:r.status});return j};
+function mkDB(){const subs=[];let busy=0;const f=x=>({id:x.id,data:()=>{const{id,...y}=x;return y}}),mk=(r,p)=>({docs:r.map(f),docChanges:()=>r.filter(x=>!p.some(y=>y.id==x.id)).map(x=>({type:'added',doc:f(x)}))});
+ async function tick(){if(busy||document.hidden)return;busy=1;try{const cols=[...new Set(subs.filter(s=>s.c!='msgs').map(s=>s.c))],all=cols.length?await API('sync',{cols}):{};
+  for(const s of subs.slice()){const r=s.c=='msgs'?(await API('db',{op:'list',col:'msgs',where:s.w})).rows:all[s.c]||[],h=JSON.stringify(r);if(h!==s.h){const p=s.p;s.h=h;s.p=r;s.fn(mk(r,p))}}}catch(e){if(e.status==401)location.reload()}busy=0}
+ const kick=()=>setTimeout(tick,150);setInterval(tick,3000);
+ const W=(op,c,id)=>async d=>{await API('db',{op,col:c,id,data:d});kick()},ref=(c,id)=>({id,set:W('set',c,id),update:W('update',c,id),delete:()=>W('delete',c,id)()}),
+ q=(c,w)=>({where:(k,o,v)=>q(c,{...w,[k]:v}),onSnapshot:(fn,er)=>{const s={c,w,fn,p:[],h:null};subs.push(s);kick();return()=>{const i=subs.indexOf(s);if(i>=0)subs.splice(i,1)}}});
+ return{collection:c=>({...q(c,{}),doc:id=>ref(c,id),add:async d=>{const r=await API('db',{op:'add',col:c,data:d});kick();return{id:r.id}}}),doc:p=>{const[c,i]=p.split('/');return ref(c,i)}}}
+function loginUI(){$('#app').innerHTML=`<h1>BudFin ☀️</h1><div class="card"><b>Sign in with your IITR email</b><input id="le" type="email" placeholder="you@ce.iitr.ac.in"><button class="p" onclick="reqCode()">Send code</button><div id="lo2"></div></div>`}
+async function reqCode(){const e=$('#le').value.trim().toLowerCase();try{const r=await API('auth/request',{email:e});window._em=e;$('#lo2').innerHTML=`<p class="mu">Code sent to ${esc(e)}.${r.dev?' Dev code: <b>'+r.dev+'</b>':''}</p><input id="lc2" inputmode="numeric" placeholder="6-digit code"><button class="p" onclick="verCode()">Verify</button>`}catch(x){toast(x.message)}}
+async function verCode(){try{await API('auth/verify',{email:window._em,code:$('#lc2').value.trim()});location.reload()}catch(x){toast(x.message)}}
+addEventListener('unhandledrejection',e=>toast((e.reason&&e.reason.message)||'Action failed'));
+init();
+
+</script></body></html>
